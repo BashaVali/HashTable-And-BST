@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HashTablesAndTrees
+namespace HashingAndBST
 {
-
     public class BST<T> where T : IComparable<T>
     {
         public T nodeData { get; set; }
         public BST<T> leftTree { get; set; }
+
         public BST<T> rightTree { get; set; }
 
         public BST(T data)
@@ -21,31 +21,37 @@ namespace HashTablesAndTrees
         }
         int leftCount = 0, rightCount = 0;
 
-        public void Insert(T Value)
+        public void Insert(T item)
         {
-            T CurrNodeVal = this.nodeData;    // Current Node Value Compares
-            if ((CurrNodeVal.CompareTo(Value)) > 0)
+            T CurrNodeVal = this.nodeData;
+            if ((CurrNodeVal.CompareTo(item)) > 0)
             {
                 if (this.leftTree == null)
                 {
-                    this.leftTree = new BST<T>(Value);
+                    this.leftTree = new BST<T>(item);
                 }
                 else
                 {
-                    this.leftTree.Insert(Value);
+                    this.leftTree.Insert(item);
+                    leftCount++;
                 }
             }
             else
             {
                 if (this.rightTree == null)
                 {
-                    this.rightTree = new BST<T>(Value);
+                    this.rightTree = new BST<T>(item);
                 }
                 else
                 {
-                    this.rightTree.Insert(Value);
+                    this.rightTree.Insert(item);
+                    rightCount++;
                 }
             }
+        }
+        public void GetSize()
+        {
+            Console.WriteLine("Size " + " " + (1 + this.leftCount + this.rightCount));
         }
 
         public void Display()
